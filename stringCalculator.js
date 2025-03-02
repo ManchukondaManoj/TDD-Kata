@@ -3,7 +3,11 @@ function Add(stringNum) {
     return 0;
   }
 
-  const delimiter = /\n|,/;
+  let delimiter = /\n|,/;
+  if (stringNum.startsWith("//")) {
+    delimiter = stringNum[2];
+    stringNum = stringNum.slice(4);
+  }
   const numArray = stringNum.split(delimiter).map((n) => parseInt(n, 10));
   const sum = numArray.reduce((acc, curVal) => acc + curVal, 0);
   return sum;
