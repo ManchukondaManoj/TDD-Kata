@@ -1,3 +1,5 @@
 function Add(stringNum) {}
 
-module.exports = {};
+module.exports = {
+  Add,
+};
