@@ -4,15 +4,17 @@ function Add(stringNum) {
   }
 
   let delimiter = /\n|,/;
-  if (stringNum.startsWith("//")) {
-    if (stringNum[2] === "[") {
-      const closingBracketIndex = stringNum.indexOf("]");
-      delimiter = stringNum.slice(3, closingBracketIndex);
-      stringNum = stringNum.slice(closingBracketIndex + 2); //+2 is for \n chars
-    } else {
-      delimiter = stringNum[2];
-      stringNum = stringNum.substring(4);
-    }
+  const customDelimiterMatch = stringNum.match(/^\/\/(\[.*\])\n/);
+  if (customDelimiterMatch) {
+    const delimiters = customDelimiterMatch[1]
+      .slice(1, -1)
+      .split("][")
+      .map((d) => d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    delimiter = new RegExp(delimiters.join("|"));
+    stringNum = stringNum.slice(customDelimiterMatch[0].length);
+  } else if (stringNum.startsWith("//")) {
+    delimiter = stringNum[2];
+    stringNum = stringNum.substring(4);
   }
 
   const numArray = stringNum.split(delimiter).map((n) => parseInt(n, 10));
