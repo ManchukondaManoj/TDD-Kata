@@ -5,9 +5,16 @@ function Add(stringNum) {
 
   let delimiter = /\n|,/;
   if (stringNum.startsWith("//")) {
-    delimiter = stringNum[2];
-    stringNum = stringNum.slice(4);
+    if (stringNum[2] === "[") {
+      const closingBracketIndex = stringNum.indexOf("]");
+      delimiter = stringNum.slice(3, closingBracketIndex);
+      stringNum = stringNum.slice(closingBracketIndex + 2); //+2 is for \n chars
+    } else {
+      delimiter = stringNum[2];
+      stringNum = stringNum.substring(4);
+    }
   }
+
   const numArray = stringNum.split(delimiter).map((n) => parseInt(n, 10));
   const negativeNumArray = numArray.filter((num) => num < 0);
   if (negativeNumArray.length) {
