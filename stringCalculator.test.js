@@ -14,4 +14,8 @@ test("String Calculator", async (t) => {
   await t.test("Should handle two numbers", () => {
     assert.strictEqual(Add("2, 1"), 3);
   });
+
+  await t.test("Should handle any amount of numbers", () => {
+    assert.strictEqual(Add("1,2,3"), 6);
+  });
 });
