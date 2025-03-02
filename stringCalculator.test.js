@@ -31,4 +31,8 @@ test("String Calculator", async (t) => {
       message: "negative numbers not allowed: -1, -2",
     });
   });
+
+  await t.test("Should ignore numbers bigger than 1000", () => {
+    assert.strictEqual(Add("//;\n1;1001"), 1);
+  });
 });
