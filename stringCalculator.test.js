@@ -26,4 +26,9 @@ test("String Calculator", async (t) => {
   await t.test("Should support different delimiters", () => {
     assert.strictEqual(Add("//;\n1;2"), 3);
   });
+  await t.test("Should throw error if input has negative numbers", () => {
+    assert.throws(() => Add("-1, -2"), {
+      message: "negative numbers not allowed: -1, -2",
+    });
+  });
 });
