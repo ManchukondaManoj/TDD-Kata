@@ -35,4 +35,7 @@ test("String Calculator", async (t) => {
   await t.test("Should ignore numbers bigger than 1000", () => {
     assert.strictEqual(Add("//;\n1;1001"), 1);
   });
+  await t.test("Should allow delimiter of any length", () => {
+    assert.strictEqual(Add("//[***]\n1***2***3"), 6);
+  });
 });
