@@ -18,4 +18,8 @@ test("String Calculator", async (t) => {
   await t.test("Should handle any amount of numbers", () => {
     assert.strictEqual(Add("1,2,3"), 6);
   });
+
+  await t.test("Should allow new lines between numbers", () => {
+    assert.strictEqual(Add("1\n2,3"), 6);
+  });
 });
