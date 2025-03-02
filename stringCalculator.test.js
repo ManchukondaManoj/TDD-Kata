@@ -38,4 +38,7 @@ test("String Calculator", async (t) => {
   await t.test("Should allow delimiter of any length", () => {
     assert.strictEqual(Add("//[***]\n1***2***3"), 6);
   });
+  await t.test("should allow multiple delimters", () => {
+    assert.strictEqual(Add("//[*][%]\n1*2%3"), 6);
+  });
 });
