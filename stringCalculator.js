@@ -23,10 +23,14 @@ function Add(stringNum) {
     const negativeNums = negativeNumArray.join(", ");
     throw new Error(`negative numbers not allowed: ${negativeNums}`);
   }
-  const sum = numArray.reduce(
-    (acc, curVal) => (curVal > 1000 ? acc : acc + curVal),
-    0
-  );
+
+  const initVal = delimiter === "*" ? 1 : 0;
+
+  const sum = numArray
+    .filter((ele) => ele < 1001)
+    .reduce((acc, curVal) => {
+      return initVal ? acc * curVal : acc + curVal;
+    }, initVal);
   return sum;
 }
 
